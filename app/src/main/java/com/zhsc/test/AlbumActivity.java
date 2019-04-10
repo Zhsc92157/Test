@@ -58,17 +58,10 @@ public class AlbumActivity extends AppCompatActivity {
         MyImageViewAdapter adapter = new MyImageViewAdapter(picturePathList);
         mRecyclerView.setAdapter(adapter);
 
-        Listener listener = new Listener();
+        ClickListener listener = new ClickListener();
 
         backImageView.setOnClickListener(listener);
         selectedTextView.setOnClickListener(listener);
-
-        myPopUpWindow.setSelectItemListener(new MyPopUpWindow.SelectItemListener() {
-            @Override
-            public void selectItem(String name, int position) {
-                Log.e( "selectItem: ", name);
-            }
-        });
 
     }
 
@@ -155,7 +148,7 @@ public class AlbumActivity extends AppCompatActivity {
         return imgFolderList;
     }
 
-    class Listener implements View.OnClickListener{
+    class ClickListener implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
@@ -169,6 +162,19 @@ public class AlbumActivity extends AppCompatActivity {
 
     private void showPopUpMenu() {
         myPopUpWindow = new MyPopUpWindow(getApplicationContext(),(ArrayList<String>)imageFolderList);
+        myPopUpWindow.setSelectItemListener(new MyPopUpWindow.SelectItemListener() {
+            @Override
+            public void selectItem(String name, int position) {
+                Log.e( "selectItem: ", name);
+                initPicturePathList(imageFolderList,position);
+                GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),3);
+                mRecyclerView.setLayoutManager(layoutManager);
+                MyImageViewAdapter adapter = new MyImageViewAdapter(picturePathList);
+                mRecyclerView.setAdapter(adapter);
+                if(myPopUpWindow.isShowing()&&myPopUpWindow!=null)
+                    myPopUpWindow.dismiss();
+            }
+        });
         myPopUpWindow.showAsDropDown(selectedTextView,0,-0);
     }
 
