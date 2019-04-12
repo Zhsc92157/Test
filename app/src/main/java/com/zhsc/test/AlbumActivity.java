@@ -2,11 +2,10 @@ package com.zhsc.test;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zhsc.test.com.zhsc.test.com.zhsc.test.adapter.MyImageViewAdapter;
+import com.zhsc.test.adapter.MyImageViewAdapter;
 
 import java.io.File;
 import java.util.ArrayList;

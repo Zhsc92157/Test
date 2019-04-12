@@ -1,0 +1,6 @@
+<root>
+    <item
+        name='com.baidu.ocr.sdk.utils.HttpUtil void post(java.lang.String, com.baidu.ocr.sdk.model.RequestParams, com.baidu.ocr.sdk.utils.Parser&lt;T&gt;, com.baidu.ocr.sdk.OnResultListener&lt;T&gt;)'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

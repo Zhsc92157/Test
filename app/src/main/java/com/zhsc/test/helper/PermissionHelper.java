@@ -1,14 +1,10 @@
-package com.zhsc.test.com.zhsc.test.helper;
+package com.zhsc.test.helper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 
-import com.zhsc.test.com.zhsc.test.util.PermissionUtil;
 import com.zhsc.test.impl.PermissionInterface;
+import com.zhsc.test.util.PermissionUtil;
 
 /**
  * 动态权限帮助类

@@ -1,4 +1,4 @@
-package com.zhsc.test.com.zhsc.test.com.zhsc.test.adapter;
+package com.zhsc.test.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;

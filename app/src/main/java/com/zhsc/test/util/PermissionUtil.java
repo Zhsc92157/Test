@@ -1,4 +1,4 @@
-package com.zhsc.test.com.zhsc.test.util;
+package com.zhsc.test.util;
 
 import android.app.Activity;
 import android.content.Context;

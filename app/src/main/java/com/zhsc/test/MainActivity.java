@@ -2,7 +2,6 @@ package com.zhsc.test;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,13 +20,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zhsc.test.com.zhsc.test.helper.PermissionHelper;
-import com.zhsc.test.com.zhsc.test.util.PermissionUtil;
+import com.zhsc.test.helper.PermissionHelper;
 import com.zhsc.test.impl.PermissionInterface;
+import com.zhsc.test.util.PermissionUtil;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PermissionInterface {
 
@@ -118,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements PermissionInterfa
         String [] permissions = new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.CAMERA,
                 Manifest.permission.INTERNET
         };
@@ -214,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements PermissionInterfa
     private void displayImage(String mFilePath) {
         Bundle basket = new Bundle();
         basket.putString("FilePath",mFilePath);
-        Intent intent = new Intent(getApplicationContext(),CameraActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
         intent.putExtras(basket);
         startActivity(intent);
     }

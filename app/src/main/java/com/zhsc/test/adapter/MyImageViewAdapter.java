@@ -1,4 +1,4 @@
-package com.zhsc.test.com.zhsc.test.com.zhsc.test.adapter;
+package com.zhsc.test.adapter;
 
 
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.zhsc.test.CameraActivity;
+import com.zhsc.test.ImageActivity;
 import com.zhsc.test.R;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class MyImageViewAdapter extends RecyclerView.Adapter<MyImageViewAdapter.
                 String imageViewPath = imagePathList.get(position);
                 Bundle basket = new Bundle();
                 basket.putString("FilePath",imageViewPath);
-                Intent intent = new Intent(v.getContext(), CameraActivity.class);
+                Intent intent = new Intent(v.getContext(), ImageActivity.class);
                 intent.putExtras(basket);
                 v.getContext().startActivity(intent);
 

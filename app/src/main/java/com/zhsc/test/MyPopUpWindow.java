@@ -1,11 +1,6 @@
 package com.zhsc.test;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zhsc.test.com.zhsc.test.com.zhsc.test.adapter.MyFolderListAdapter;
+import com.zhsc.test.adapter.MyFolderListAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyPopUpWindow extends PopupWindow {
 
@@ -45,7 +38,8 @@ public class MyPopUpWindow extends PopupWindow {
         folderListView = v.findViewById(R.id.listView_folder);
 
         for (int i = 0;i<list.size();i++){
-            imageFolderList.add(list.get(i).substring(list.get(i).lastIndexOf("/")+1,list.get(i).length()));
+            String folderName = list.get(i).substring(list.get(i).lastIndexOf("/")+1,list.get(i).length());
+            imageFolderList.add(folderName);
             Log.e("添加文件夹名",imageFolderList.get(i));
         }
 
@@ -74,10 +68,6 @@ public class MyPopUpWindow extends PopupWindow {
             if (selectItemListener != null)
                 selectItemListener.selectItem(imageFolderList.get((int)id),position);
             Toast.makeText(view.getContext(),"position:"+position+" id:"+id,Toast.LENGTH_SHORT).show();
-            /*AlbumActivity.menuIndex = position;
-            View v = LayoutInflater.from(context).inflate(R.layout.activity_album,null);
-            TextView selectedTextView = v.findViewById(R.id.selectedText);
-            selectedTextView.setText(imageFolderList.get((int)id));*/
             dismiss();
         }
     }
