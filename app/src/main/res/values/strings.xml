@@ -5,4 +5,5 @@
     <string name="choosepic">选择相片</string>
     <string name="back">back</string>
     <string name="certain">确定</string>
+    <string name="show_result">结果</string>
 </resources>

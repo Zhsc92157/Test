@@ -11,6 +11,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.zhsc.test.adapter.MyFolderListAdapter;
+import com.zhsc.test.impl.MyPopWindowSelectListener;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class MyPopUpWindow extends PopupWindow {
     private MyFolderListAdapter adapter;
     private ListView folderListView;
     private Context context;
-    private SelectItemListener selectItemListener;
+    private MyPopWindowSelectListener selectItemListener;
 
     public MyPopUpWindow(Context context,ArrayList<String> list){
         this.context = context;
@@ -52,11 +53,8 @@ public class MyPopUpWindow extends PopupWindow {
 
     }
 
-    public interface SelectItemListener{
-        void selectItem(String name,int position);
-    }
 
-    public void setSelectItemListener(SelectItemListener listener){
+    public void setSelectItemListener(MyPopWindowSelectListener listener){
         selectItemListener = listener;
     }
 

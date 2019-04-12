@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhsc.test.adapter.MyImageViewAdapter;
+import com.zhsc.test.impl.MyPopWindowSelectListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -161,7 +162,7 @@ public class AlbumActivity extends AppCompatActivity {
 
     private void showPopUpMenu() {
         myPopUpWindow = new MyPopUpWindow(getApplicationContext(),(ArrayList<String>)imageFolderList);
-        myPopUpWindow.setSelectItemListener(new MyPopUpWindow.SelectItemListener() {
+        myPopUpWindow.setSelectItemListener(new MyPopWindowSelectListener() {
             @Override
             public void selectItem(String name, int position) {
                 Log.e( "selectItem: ", name);
