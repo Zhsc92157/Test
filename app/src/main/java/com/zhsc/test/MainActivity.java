@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements PermissionInterfa
         Toast.makeText(getApplicationContext(),"Open Camera",Toast.LENGTH_SHORT).show();
 
         if(PermissionUtil.hasPermission(getApplicationContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)){
             String state = Environment.getExternalStorageState();
             if(state.equals(Environment.MEDIA_MOUNTED)) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements PermissionInterfa
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(outFile));
                 intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
                 startActivityForResult(intent, CAMERA_REQUEST_CODE);
+                finish();
             } else{
                 Log.e("MainActivity.java", "请确认已经插入SD卡");
             }

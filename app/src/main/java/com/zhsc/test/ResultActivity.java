@@ -58,6 +58,8 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     //TODO 处理字符串中的算式是否正确 正确返回1 错误返回0
+    //TODO 1.处理分析算式，检查运算结果
+    //TODO 2.与数据库中的现有数学公式匹配（找数据库）
     private int deal(String s) {
         return 0;
     }

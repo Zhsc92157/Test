@@ -2,8 +2,11 @@ package com.zhsc.test.adapter;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +47,18 @@ public class MyImageViewAdapter extends RecyclerView.Adapter<MyImageViewAdapter.
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 String imageViewPath = imagePathList.get(position);
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                Bitmap bitmap = BitmapFactory.decodeFile(imageViewPath,options);
+                Log.e("options",""+options.outWidth);
+                int width = options.outWidth;
+                int height = options.outHeight;
+
                 Bundle basket = new Bundle();
                 basket.putString("FilePath",imageViewPath);
+                basket.putInt("FileWidth",width);
+                basket.putInt("FileHeight",height);
                 Intent intent = new Intent(v.getContext(), ImageActivity.class);
                 intent.putExtras(basket);
                 v.getContext().startActivity(intent);
