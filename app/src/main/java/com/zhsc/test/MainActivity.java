@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.zhsc.test.helper.PermissionHelper;
 import com.zhsc.test.impl.PermissionInterface;
+import com.zhsc.test.util.CalculateUtil;
 import com.zhsc.test.util.PermissionUtil;
 
 import java.io.File;
@@ -67,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements PermissionInterfa
             builder.detectFileUriExposure();
         }
 
+        if (CalculateUtil.isCorrect("6-2*(3+5)=-10"))
+            Log.e("afterCal","right");
+        else
+            Log.e("afterCal","false");
 
     }
 

@@ -13,9 +13,6 @@ public class PermissionHelper {
 
     private Activity activity;
     private PermissionInterface permissionInterface;
-    private String permission;
-    private int callBackCode;
-
 
     public PermissionHelper(Activity activity, PermissionInterface permissionInterface) {
         this.activity = activity;
