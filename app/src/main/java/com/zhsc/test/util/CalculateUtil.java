@@ -60,7 +60,9 @@ public class CalculateUtil {
         if(str.contains("=")){
             String formerPart = str.substring(0,str.indexOf("="));
             String latterPart = str.substring(str.indexOf("=")+1);
-
+            String pattern = "[^0123456789=\\(\\)+\\-*/]";
+            if (Pattern.matches(pattern,str))
+                return false;
             int result = calculate(formerPart);
             if (result == Integer.parseInt(latterPart))
                 return true;

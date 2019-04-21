@@ -1,6 +1,5 @@
 package com.zhsc.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,8 +32,6 @@ public class ResultActivity extends AppCompatActivity {
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResultActivity.this,MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

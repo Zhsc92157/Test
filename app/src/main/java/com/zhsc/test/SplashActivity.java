@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             //跳转
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(),BottomBarActivity.class);
             startActivity(intent);
             finish();
         }
