@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/seashell"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:background="@color/white"
+        android:id="@+id/editTextRegUsername"
+        android:textColor="@color/black"
+        android:hint="@string/username"
+        android:textColorHint="@color/grey"
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <EditText
+        android:background="@color/white"
+        android:id="@+id/editTextRegPassword"
+        android:textColor="@color/black"
+        android:layout_below="@+id/editTextRegUsername"
+        android:textColorHint="@color/grey"
+        android:hint="@string/password"
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <Button
+        android:id="@+id/button_reg_fragment"
+        android:layout_below="@id/editTextRegPassword"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_photo_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log_in"/>
+
+
+
+</RelativeLayout>

@@ -54,7 +54,7 @@ public class CalculateUtil {
         }
         return false;
     }
-    //TODO 计算等号前面的字符串多项式和后面字符串多项式进行比对
+
     public static boolean isCorrect(String str){
 
         if(str.contains("=")){

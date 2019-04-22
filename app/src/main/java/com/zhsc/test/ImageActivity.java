@@ -39,7 +39,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.zhsc.test.AuthService.getAuth;
+import static com.zhsc.test.service.AuthService.getAuth;
 
 public class ImageActivity extends AppCompatActivity {
 

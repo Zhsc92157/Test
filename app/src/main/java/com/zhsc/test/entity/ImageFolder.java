@@ -1,4 +1,4 @@
-package com.zhsc.test;
+package com.zhsc.test.entity;
 
 public class ImageFolder {
 
