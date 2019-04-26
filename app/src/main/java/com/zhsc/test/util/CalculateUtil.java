@@ -57,10 +57,17 @@ public class CalculateUtil {
 
     public static boolean isCorrect(String str){
 
+        if (isContainChinese(str))
+            return false;
+
+        str = symbolConversion(str);
+
         if(str.contains("=")){
             String formerPart = str.substring(0,str.indexOf("="));
             String latterPart = str.substring(str.indexOf("=")+1);
-            String pattern = "[^0123456789=\\(\\)+\\-*/]";
+            if (latterPart.equals(""))
+                return false;
+            String pattern = "[^0123456789=\\(\\)+\\-\\*/]";
             if (Pattern.matches(pattern,str))
                 return false;
             int result = calculate(formerPart);
@@ -72,7 +79,22 @@ public class CalculateUtil {
             return false;
     }
 
-    public static int calculate(String strExpression)
+    /**
+     * 将手写的×转换为*，手写÷转换为/
+     * @param str
+     */
+    private static String symbolConversion(String str) {
+        char multi = 215;
+        String result;
+        result = str.replace('x', '*');
+        result = result.replace(multi,'*');
+        result = result.replace('X','*');
+        result = result.replace('÷','/');
+        System.out.println(result);
+        return result;
+    }
+
+    private static int calculate(String strExpression)
     {
         String s = simplify(strExpression);
         System.out.println("s : "+s);
@@ -87,7 +109,7 @@ public class CalculateUtil {
 
             if(isAllOpe(ch))
             {
-                if(numStr!="")
+                if(!numStr.equals(""))
                 {
                     list.add(numStr);
                     numStr="";
@@ -154,29 +176,29 @@ public class CalculateUtil {
             {//将t转换成int 方便计算
                 num.push(Integer.parseInt(t));
             }
-            else
-            {
+            else {
                 //如果t为运算符则 只有一位
                 char c = t.charAt(0);
-                int b = num.pop();
-                //如果有 算式是类似于 -8-8 这样的需要判断一下栈是否为空
-                int a = num.pop();
-                switch(c)
-                {
-                    case '+':
-                        num.push(a+b);
-                        break;
-                    case '-':
-                        num.push(a-b);
-                        break;
-                    case '*':
-                        num.push(a*b);
-                        break;
-                    case '/':
-                        num.push(a/b);
-                        break;
-                    default:
-                        break;
+                if (num.size()>=2) {
+                    int b = num.pop();
+                    //如果有 算式是类似于 -8-8 这样的需要判断一下栈是否为空
+                    int a = num.pop();
+                    switch (c) {
+                        case '+':
+                            num.push(a + b);
+                            break;
+                        case '-':
+                            num.push(a - b);
+                            break;
+                        case '*':
+                            num.push(a * b);
+                            break;
+                        case '/':
+                            num.push(a / b);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

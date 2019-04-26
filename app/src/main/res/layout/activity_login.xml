@@ -4,7 +4,7 @@
     android:background="@color/seashell"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/logImage"
@@ -22,6 +22,7 @@
         android:id="@+id/editTextLogInUsername"
         android:inputType="text"
         android:hint="@string/username"
+        android:maxLines="1"
         android:textColorHint="@color/grey"
         android:layout_margin="10sp"
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         android:textColor="@color/black"
         android:layout_below="@+id/editTextLogInUsername"
         android:textColorHint="@color/grey"
+        android:maxLines="1"
         android:hint="@string/password"
         android:layout_margin="10sp"
         android:layout_width="match_parent"

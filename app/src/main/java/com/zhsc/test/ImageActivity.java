@@ -168,7 +168,7 @@ public class ImageActivity extends AppCompatActivity {
      */
     private void httpsPost(){
         //通用带精确位置识别url
-        String host = "https://aip.baidubce.com/rest/2.0/ocr/v1/general";
+        String host = "https://aip.baidubce.com/rest/2.0/ocr/v1/handwriting";
         //文件路径
         String filePath = imagePath;
         try {
@@ -211,13 +211,6 @@ public class ImageActivity extends AppCompatActivity {
             userBeanArrayList.add(userBean);
             wordsList.add(userBean.words);
             locationList.add(userBean.location);
-            if (verify(userBean.words)){
-                resultsList.add(true);
-                System.out.println(resultsList.get(cnt++));
-            }else{
-                resultsList.add(false);
-                System.out.println(resultsList.get(cnt++));
-            }
         }
     }
 
@@ -240,7 +233,6 @@ public class ImageActivity extends AppCompatActivity {
      * @param height
      * @param left
      * @param top
-     * @param i
      */
     public void addView(float width,float height,float left,float top,int i){
         //new一个imageView作为矩形红框
@@ -261,10 +253,13 @@ public class ImageActivity extends AppCompatActivity {
         GradientDrawable gd_circle = new GradientDrawable();
         gd_circle.setGradientType(GradientDrawable.RECTANGLE);
         gd_circle.setColor(Color.parseColor("#00000000"));
-        if (resultsList.get(i)==true)
-            gd_circle.setStroke(10,Color.parseColor("#32CD32"));
-        else
-            gd_circle.setStroke(10,Color.parseColor("#FF0000"));
+        if (verify(wordsList.get(i))) {
+            Log.e("wordList"+" "+i,"true");
+            gd_circle.setStroke(10, Color.parseColor("#32CD32"));
+        }else {
+            Log.e("wordList"+" "+i,"false");
+            gd_circle.setStroke(10, Color.parseColor("#FF0000"));
+        }
         circle.setImageDrawable(gd_circle);
 
         //获取图片放大倍数
@@ -281,7 +276,7 @@ public class ImageActivity extends AppCompatActivity {
         float addHeightTemp = (image_height-real_height*multiple)/2;
         float addLeftTemp = (image_width-real_width*multiple)/2;
         //添加横向或者纵向的偏移
-        if (flag == true)
+        if (flag)
         {
             width = width*multiple;
             height = height*multiple;
@@ -342,13 +337,7 @@ public class ImageActivity extends AppCompatActivity {
      * @return
      */
     private boolean verify(String str) {
-        //包含中英文字符或者为空 返回false
-        if (CalculateUtil.isContainChinese(str)&&CalculateUtil.isContainEnglish(str)){
-            Toast.makeText(getApplicationContext(),"可能相片清晰度不够或者含特殊符号噢~",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else{
-            return CalculateUtil.isCorrect(str);
-        }
+        return CalculateUtil.isCorrect(str);
     }
+
 }

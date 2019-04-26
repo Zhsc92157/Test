@@ -8,14 +8,6 @@ import cn.bmob.v3.datatype.BmobFile;
  */
 public class User extends BmobUser {
     /**
-     * 用户名 账号 唯一识别
-     */
-    private String username;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
      * 昵称
      */
     private String nickname;
@@ -32,16 +24,6 @@ public class User extends BmobUser {
      */
     private BmobFile avatar;
 
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -56,15 +38,6 @@ public class User extends BmobUser {
 
     public void setAvatar(BmobFile avatar) {
         this.avatar = avatar;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getNickname() {

@@ -34,7 +34,7 @@ public class BottomBarActivity extends AppCompatActivity implements PermissionIn
         bottomBar.setContainer(R.id.container)
                 .setTitleBeforeAndAfterColor("#999999","#000000")
                 .addItem(MainFragment.class,"Main",R.drawable.main_unselected,R.drawable.main_selected)
-                .addItem(LoginFragment.class,"Me",R.drawable.result_unselected,R.drawable.result_selected)
+                .addItem(MyselfFragment.class,"Me",R.drawable.result_unselected,R.drawable.result_selected)
                 .build();
 
     }

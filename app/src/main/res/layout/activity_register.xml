@@ -7,36 +7,78 @@
     android:background="@color/seashell"
     tools:context=".RegisterActivity">
 
-    <EditText
-        android:background="@color/white"
-        android:id="@+id/editTextRegUsername"
-        android:textColor="@color/black"
-        android:hint="@string/username"
-        android:textColorHint="@color/grey"
-        android:layout_margin="10sp"
+    <LinearLayout
+        android:id="@+id/regLinear"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
-    <EditText
-        android:background="@color/white"
-        android:id="@+id/editTextRegPassword"
-        android:textColor="@color/black"
-        android:layout_below="@+id/editTextRegUsername"
-        android:textColorHint="@color/grey"
-        android:hint="@string/password"
-        android:layout_margin="10sp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:background="@color/white"
+            android:id="@+id/editTextRegUsername"
+            android:textColor="@color/black"
+            android:hint="@string/username"
+            android:maxLines="1"
+            android:textColorHint="@color/grey"
+            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <EditText
+            android:background="@color/white"
+            android:id="@+id/editTextRegPassword"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:hint="@string/password"
+            android:maxLines="1"
+            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <EditText
+            android:background="@color/white"
+            android:id="@+id/editTextRegPasswordAgain"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:hint="@string/password_again"
+            android:maxLines="1"
+            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/confirmCodeLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/regLinear">
+
+        <ImageView
+            android:id="@+id/confirmCodeImage"
+            android:layout_margin="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/editTextRegConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:hint="@string/confirm_code"
+            android:maxLines="1"
+            android:layout_margin="10sp"
+            />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_reg_fragment"
-        android:layout_below="@id/editTextRegPassword"
         android:layout_marginTop="50dp"
         android:layout_centerInParent="true"
         android:background="@drawable/button_photo_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/log_in"/>
-
-
+        android:text="@string/register"/>
 
 </RelativeLayout>
