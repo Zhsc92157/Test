@@ -1,10 +1,8 @@
 package com.zhsc.test.adapter;
 
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +11,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.zhsc.test.ImageActivity;
 import com.zhsc.test.R;
+import com.zhsc.test.impl.MyAlbumInterface;
 
 import java.util.List;
 
 public class MyImageViewAdapter extends RecyclerView.Adapter<MyImageViewAdapter.ViewHolder> {
 
     List<String> imagePathList;
+
+    MyAlbumInterface albumInterface;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
@@ -34,6 +34,10 @@ public class MyImageViewAdapter extends RecyclerView.Adapter<MyImageViewAdapter.
 
     public MyImageViewAdapter(List<String> list){
         imagePathList = list;
+    }
+
+    public void setSelectItemImageInterface(MyAlbumInterface myAlbumInterface){
+        albumInterface = myAlbumInterface;
     }
 
     @Override
@@ -55,13 +59,9 @@ public class MyImageViewAdapter extends RecyclerView.Adapter<MyImageViewAdapter.
                 int width = options.outWidth;
                 int height = options.outHeight;
 
-                Bundle basket = new Bundle();
-                basket.putString("FilePath",imageViewPath);
-                basket.putInt("FileWidth",width);
-                basket.putInt("FileHeight",height);
-                Intent intent = new Intent(v.getContext(), ImageActivity.class);
-                intent.putExtras(basket);
-                v.getContext().startActivity(intent);
+                if (albumInterface!=null) {
+                    albumInterface.selectItem(imageViewPath, width, height);
+                }
 
             }
         });

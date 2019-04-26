@@ -14,4 +14,7 @@
     <string name="password_again">再次输入密码</string>
     <string name="confirm_code">输入验证码</string>
     <string name="myself">个人界面</string>
+    <string name="cuotiben">错题本</string>
+    <string name="xuexizhoubao">学习周报</string>
+    <string name="self_info">个人信息</string>
 </resources>

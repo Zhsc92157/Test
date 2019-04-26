@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/seashell"
+    tools:context=".EditMyselfActivity">
+
+    <RelativeLayout
+        android:id="@+id/editActivity_titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:layout_margin="16sp"
+            android:contentDescription="@string/back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/self_info"
+            android:textColor="@color/seashell"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_editImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="宝贝头像"
+            android:layout_centerVertical="true"
+            android:textColor="@color/grey"
+            android:layout_margin="20sp"/>
+
+        <ImageView
+            android:id="@+id/editActivity_image"
+            android:src="@drawable/avater_unlogin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="20sp"
+            android:layout_width="46sp"
+            android:layout_height="46sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_editNickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="宝贝昵称"
+            android:layout_centerVertical="true"
+            android:textColor="@color/grey"
+            android:layout_margin="20sp"/>
+
+        <TextView
+            android:id="@+id/editActivity_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="请设置昵称"
+            android:layout_margin="20sp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/seashell"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号"
+            android:layout_centerVertical="true"
+            android:textColor="@color/grey"
+            android:layout_margin="20sp"/>
+
+        <TextView
+            android:id="@+id/editActivity_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:text="1111"
+            android:layout_margin="20sp"/>
+    </RelativeLayout>
+
+</LinearLayout>

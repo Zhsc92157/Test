@@ -6,10 +6,92 @@
     android:background="@color/seashell"
     tools:context=".MyselfFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:text="@string/myself" />
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="@color/aliceblue"
+            android:layout_width="match_parent"
+            android:layout_height="200sp">
+
+            <ImageView
+                android:id="@+id/myself_edit"
+                android:src="@drawable/edit_myself"
+                android:layout_width="34sp"
+                android:layout_height="34sp"
+                android:layout_margin="20sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"/>
+
+            <ImageView
+                android:id="@+id/myself_touxiang"
+                android:src="@drawable/avater_unlogin"
+                android:layout_centerInParent="true"
+                android:layout_width="80sp"
+                android:layout_height="80sp"/>
+            <TextView
+                android:id="@+id/myself_touxiang_text"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/myself_touxiang"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/myself_cuotiben"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/seashell">
+                <ImageView
+                    android:id="@+id/cuotiben_image"
+                    android:src="@drawable/cuotiben"
+                    android:scaleType="fitXY"
+                    android:layout_margin="10sp"
+                    android:layout_width="34sp"
+                    android:layout_height="34sp" />
+
+                <TextView
+                    android:layout_toRightOf="@+id/cuotiben_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/cuotiben"
+                    android:textColor="@color/black"
+                    android:layout_margin="10sp" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black"/>
+            <RelativeLayout
+                android:id="@+id/myself_xuexizhoubao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/xuexizhoubao_image"
+                    android:src="@drawable/xuexizhoubao"
+                    android:scaleType="fitXY"
+                    android:layout_margin="10sp"
+                    android:layout_width="34sp"
+                    android:layout_height="34sp" />
+
+                <TextView
+                    android:layout_toRightOf="@+id/xuexizhoubao_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/xuexizhoubao"
+                    android:textColor="@color/black"
+                    android:layout_margin="10sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
 </FrameLayout>

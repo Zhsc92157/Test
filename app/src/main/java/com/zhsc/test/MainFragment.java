@@ -126,6 +126,7 @@ public class MainFragment extends Fragment{
     private void startAlbum(){
         Toast.makeText(getActivity().getApplicationContext(),"Open Album",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
+        intent.putExtra("from","MainFragment");
         intent.setClass(getActivity(),AlbumActivity.class);
         startActivity(intent);
     }

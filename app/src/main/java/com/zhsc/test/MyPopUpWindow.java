@@ -15,6 +15,9 @@ import com.zhsc.test.impl.MyPopWindowSelectListener;
 
 import java.util.ArrayList;
 
+/**
+ * 相册popupwindow
+ */
 public class MyPopUpWindow extends PopupWindow {
 
     private ArrayList<String> imageFolderList = new ArrayList<String>();

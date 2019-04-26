@@ -1,6 +1,7 @@
 package com.zhsc.test;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zhsc.test.adapter.MyImageViewAdapter;
+import com.zhsc.test.impl.MyAlbumInterface;
 import com.zhsc.test.impl.MyPopWindowSelectListener;
 
 import java.io.File;
@@ -35,11 +37,19 @@ public class AlbumActivity extends AppCompatActivity {
 
     MyPopUpWindow myPopUpWindow;
 
+    ImageSelectedListener imageSelectedListener;
+
+    String call_mode = null;
+    String imagePathSelected = null;
+    int imageWidth = 0;
+    int imageHeight = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album);
+
+        call_mode = getIntent().getStringExtra("from");
 
         selectedTextView = findViewById(R.id.selectedText);
         backImageView = findViewById(R.id.back);
@@ -56,13 +66,18 @@ public class AlbumActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this,3);
         mRecyclerView.setLayoutManager(layoutManager);
         MyImageViewAdapter adapter = new MyImageViewAdapter(picturePathList);
+        //处理回调
+        imageSelectedListener = new ImageSelectedListener();
+        adapter.setSelectItemImageInterface(imageSelectedListener);
+
         mRecyclerView.setAdapter(adapter);
 
         ClickListener listener = new ClickListener();
 
+        imageViewItem.setOnClickListener(listener);
         backImageView.setOnClickListener(listener);
         selectedTextView.setOnClickListener(listener);
-
+        
     }
 
     /**
@@ -160,6 +175,32 @@ public class AlbumActivity extends AppCompatActivity {
         }
     }
 
+    class ImageSelectedListener implements MyAlbumInterface{
+
+        @Override
+        public void selectItem(String imagePath, int width, int height) {
+            imagePathSelected = imagePath;
+            imageWidth = width;
+            imageHeight = height;
+            Intent intent;
+            if (call_mode.equals("MainFragment")){
+                intent = new Intent(getApplicationContext(),ImageActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("FilePath",imagePathSelected);
+                bundle.putInt("FileWidth",imageWidth);
+                bundle.putInt("FileHeight",imageHeight);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }else if (call_mode.equals("MyselfEdit")){
+                intent = new Intent(getApplicationContext(),EditMyselfActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("FilePath",imagePathSelected);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        }
+    }
+
     private void showPopUpMenu() {
         myPopUpWindow = new MyPopUpWindow(getApplicationContext(),(ArrayList<String>)imageFolderList);
         myPopUpWindow.setSelectItemListener(new MyPopWindowSelectListener() {
@@ -170,6 +211,8 @@ public class AlbumActivity extends AppCompatActivity {
                 GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),3);
                 mRecyclerView.setLayoutManager(layoutManager);
                 MyImageViewAdapter adapter = new MyImageViewAdapter(picturePathList);
+                imageSelectedListener = new ImageSelectedListener();
+                adapter.setSelectItemImageInterface(imageSelectedListener);
                 mRecyclerView.setAdapter(adapter);
                 if(myPopUpWindow.isShowing()&&myPopUpWindow!=null)
                     myPopUpWindow.dismiss();

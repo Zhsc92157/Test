@@ -1,12 +1,9 @@
 package com.zhsc.test;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         Bmob.initialize(getApplicationContext(),"aacd4289a9b9bc7135ae79bf1e765687");
 
         initView();
-
-
 
     }
 
@@ -87,12 +82,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginSuccess() {
-        SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
-        sharedPreferences.edit()
-                .putString("ocr_username",username.getText().toString())
-                .putString("ocr_password",password.getText().toString())
-                .commit();
-        Log.e("SplashActivity",username.getText().toString()+"*******************************"+password.getText().toString());
         Intent intent = new Intent(getApplicationContext(),BottomBarActivity.class);
         startActivity(intent);
         finish();

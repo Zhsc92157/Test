@@ -1,7 +1,6 @@
 package com.zhsc.test.entity;
 
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * 用户数据类型
@@ -22,7 +21,7 @@ public class User extends BmobUser {
     /**
      * 头像
      */
-    private BmobFile avatar;
+    private String path;
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
@@ -36,8 +35,8 @@ public class User extends BmobUser {
         this.gender = gender;
     }
 
-    public void setAvatar(BmobFile avatar) {
-        this.avatar = avatar;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getNickname() {
@@ -52,7 +51,7 @@ public class User extends BmobUser {
         return gender;
     }
 
-    public BmobFile getAvatar() {
-        return avatar;
+    public String getPath() {
+        return path;
     }
 }

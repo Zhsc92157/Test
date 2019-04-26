@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".EditMyselfActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity
@@ -39,7 +40,7 @@
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.zhsc.test.BmobContentProvider"></provider>
+            android:authorities="com.zhsc.test.BmobContentProvider" />
     </application>
 
 </manifest>
