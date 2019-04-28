@@ -36,6 +36,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/myself_touxiang"
                 android:textColor="@color/black"
+                android:layout_margin="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -53,6 +54,7 @@
                     android:id="@+id/cuotiben_image"
                     android:src="@drawable/cuotiben"
                     android:scaleType="fitXY"
+                    android:layout_centerVertical="true"
                     android:layout_margin="10sp"
                     android:layout_width="34sp"
                     android:layout_height="34sp" />
@@ -78,6 +80,7 @@
                     android:id="@+id/xuexizhoubao_image"
                     android:src="@drawable/xuexizhoubao"
                     android:scaleType="fitXY"
+                    android:layout_centerVertical="true"
                     android:layout_margin="10sp"
                     android:layout_width="34sp"
                     android:layout_height="34sp" />
@@ -91,6 +94,34 @@
                     android:textColor="@color/black"
                     android:layout_margin="10sp" />
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/white"/>
+            <RelativeLayout
+                android:id="@+id/myself_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/setting_image"
+                    android:src="@drawable/setting"
+                    android:scaleType="fitXY"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10sp"
+                    android:layout_width="34sp"
+                    android:layout_height="34sp" />
+
+                <TextView
+                    android:layout_toRightOf="@+id/setting_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/setting"
+                    android:textColor="@color/black"
+                    android:layout_margin="10sp" />
+            </RelativeLayout>
+
         </LinearLayout>
     </LinearLayout>
 

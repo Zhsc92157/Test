@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.zhsc.test.entity.User;
 import com.zhsc.test.util.CodeUtil;
+import com.zhsc.test.util.ValidatorUtil;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
@@ -58,21 +59,30 @@ public class RegisterActivity extends AppCompatActivity {
         bt_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //是不是都填了
                 if (username.getText().toString().equals("") ||
                         password.getText().toString().equals("") ||
                         password_again.getText().toString().equals("") ||
                         getCode.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "请完善注册信息", Toast.LENGTH_SHORT).show();
                 }else{
-                    if (password.getText().toString().equals(password_again.getText().toString())) {
-                        if (getCode.getText().toString().equalsIgnoreCase(code)) {
-                            signUp();
-                        } else
-                            Toast.makeText(getApplicationContext(), "验证码不正确", Toast.LENGTH_SHORT).show();
-                    } else
-                        Toast.makeText(getApplicationContext(), "两次密码不正确", Toast.LENGTH_SHORT).show();
+                    //用户名是否规范
+                    if(ValidatorUtil.isUserName(username.getText().toString())) {
+                        if (ValidatorUtil.isPassword(password.getText().toString())) {
+                            if (password.getText().toString().equals(password_again.getText().toString())) {
+                                if (getCode.getText().toString().equalsIgnoreCase(code)) {
+                                    signUp();
+                                }else
+                                    Toast.makeText(getApplicationContext(), "验证码不正确", Toast.LENGTH_SHORT).show();
+                            }else
+                                Toast.makeText(getApplicationContext(), "两次密码不正确", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"密码长度要求6-16位",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(),"用户名格式为英文或英文＋数字，长度5-17位",Toast.LENGTH_SHORT).show();
+                    }
                 }
-
             }
         });
 

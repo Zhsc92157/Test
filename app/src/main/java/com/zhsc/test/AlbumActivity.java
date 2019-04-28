@@ -14,14 +14,21 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhsc.test.adapter.MyImageViewAdapter;
+import com.zhsc.test.entity.User;
 import com.zhsc.test.impl.MyAlbumInterface;
 import com.zhsc.test.impl.MyPopWindowSelectListener;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 import static android.os.Environment.DIRECTORY_DCIM;
 
@@ -47,6 +54,7 @@ public class AlbumActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bmob.initialize(getApplicationContext(),"aacd4289a9b9bc7135ae79bf1e765687");
         setContentView(R.layout.activity_album);
 
         call_mode = getIntent().getStringExtra("from");
@@ -77,7 +85,7 @@ public class AlbumActivity extends AppCompatActivity {
         imageViewItem.setOnClickListener(listener);
         backImageView.setOnClickListener(listener);
         selectedTextView.setOnClickListener(listener);
-        
+
     }
 
     /**
@@ -168,7 +176,13 @@ public class AlbumActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.back){
-                finish();
+                if (call_mode.equals("MainFragment"))
+                    finish();
+                if (call_mode.equals("MyselfEdit")){
+                    Intent intent = new Intent(getApplicationContext(),EditMyselfActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }else if (v.getId() == R.id.selectedText){
                 showPopUpMenu();
             }
@@ -182,7 +196,7 @@ public class AlbumActivity extends AppCompatActivity {
             imagePathSelected = imagePath;
             imageWidth = width;
             imageHeight = height;
-            Intent intent;
+            final Intent intent;
             if (call_mode.equals("MainFragment")){
                 intent = new Intent(getApplicationContext(),ImageActivity.class);
                 Bundle bundle = new Bundle();
@@ -193,10 +207,25 @@ public class AlbumActivity extends AppCompatActivity {
                 startActivity(intent);
             }else if (call_mode.equals("MyselfEdit")){
                 intent = new Intent(getApplicationContext(),EditMyselfActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("FilePath",imagePathSelected);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                //更新用户的头像数据
+                final User user = BmobUser.getCurrentUser(User.class);
+                user.setPath(imagePathSelected);
+                user.update(new UpdateListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        if (e == null) {
+                            intent.putExtra("update",true);
+                            Toast.makeText(getApplicationContext(),"更新用户信息成功",Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            intent.putExtra("update",false);
+                            Toast.makeText(getApplicationContext(),"更新用户信息失败",Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
             }
         }
     }
@@ -216,6 +245,11 @@ public class AlbumActivity extends AppCompatActivity {
                 mRecyclerView.setAdapter(adapter);
                 if(myPopUpWindow.isShowing()&&myPopUpWindow!=null)
                     myPopUpWindow.dismiss();
+            }
+
+            @Override
+            public void selectItem(int position) {
+
             }
         });
         myPopUpWindow.showAsDropDown(selectedTextView,0,-0);

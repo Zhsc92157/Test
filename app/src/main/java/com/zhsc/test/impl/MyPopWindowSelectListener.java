@@ -5,4 +5,5 @@ package com.zhsc.test.impl;
  */
 public interface MyPopWindowSelectListener {
     void selectItem(String name,int position);
+    void selectItem(int position);
 }

@@ -17,4 +17,7 @@
     <string name="cuotiben">错题本</string>
     <string name="xuexizhoubao">学习周报</string>
     <string name="self_info">个人信息</string>
+    <string name="setting">设置</string>
+    <string name="baby_nickname">宝贝昵称</string>
+    <string name="nickname">昵称</string>
 </resources>
