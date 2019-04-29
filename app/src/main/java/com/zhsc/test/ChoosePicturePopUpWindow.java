@@ -49,6 +49,8 @@ public class ChoosePicturePopUpWindow extends PopupWindow {
 
     }
 
-
+    public ChoosePicturePopUpWindow getWindow(){
+        return this;
+    }
 
 }

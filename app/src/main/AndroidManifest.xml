@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditNicknameActivity"></activity>
+        <activity android:name=".EditNicknameActivity"/>
         <activity android:name=".EditMyselfActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

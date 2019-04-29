@@ -189,6 +189,9 @@ public class AlbumActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 获取点击图片的信息
+     */
     class ImageSelectedListener implements MyAlbumInterface{
 
         @Override
@@ -245,11 +248,6 @@ public class AlbumActivity extends AppCompatActivity {
                 mRecyclerView.setAdapter(adapter);
                 if(myPopUpWindow.isShowing()&&myPopUpWindow!=null)
                     myPopUpWindow.dismiss();
-            }
-
-            @Override
-            public void selectItem(int position) {
-
             }
         });
         myPopUpWindow.showAsDropDown(selectedTextView,0,-0);

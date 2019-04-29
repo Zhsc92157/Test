@@ -6,9 +6,11 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -73,6 +75,8 @@ public class ImageActivity extends AppCompatActivity {
     private List<UserBean.LocationBean> locationList = new ArrayList<>();//每行识别的字符串的位置信息
     private List<Boolean> resultsList = new ArrayList<>();//每行公式的正确错误信息
 
+    private AlertDialog alertDialog;
+
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
         @Override
@@ -81,6 +85,13 @@ public class ImageActivity extends AppCompatActivity {
             if (msg.what == 0x123) {
                 Toast.makeText(getApplicationContext(), "分析完成", Toast.LENGTH_LONG).show();
                 showRecognitionResult();
+
+                alertDialog.dismiss();
+
+                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+                layoutParams.alpha = 1.0f;
+                getWindow().setAttributes(layoutParams);
+
             }
             else
                 Toast.makeText(getApplicationContext(),"分析中",Toast.LENGTH_SHORT).show();
@@ -105,6 +116,13 @@ public class ImageActivity extends AppCompatActivity {
                 handler.sendEmptyMessage(0x123);
             }
         }.start();
+
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.alpha=0.3f;
+        getWindow().setAttributes(layoutParams);
+
+        alertDialog.show();
+
     }
 
     /**
@@ -123,6 +141,12 @@ public class ImageActivity extends AppCompatActivity {
         Glide.with(getApplicationContext())
                 .load(imagePath)
                 .into(imageView);
+
+        alertDialog = new AlertDialog.Builder(this)
+                .setTitle("分析中")
+                .setMessage("分析中，请稍候···")
+                .setCancelable(false)
+                .create();
 
     }
 
@@ -203,8 +227,6 @@ public class ImageActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         ArrayList<UserBean> userBeanArrayList = new ArrayList<>();
-
-        int cnt = 0;
 
         for(JsonElement user:wordJsonArray){
             UserBean userBean = gson.fromJson(user, new TypeToken<UserBean>() {}.getType());

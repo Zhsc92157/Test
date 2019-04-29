@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.zhsc.test.entity.User;
 
 import java.io.File;
+import java.util.Objects;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
@@ -88,19 +90,28 @@ public class MyselfFragment extends Fragment {
             id = v.getId();
             if (id == R.id.myself_cuotiben){
                 //TODO 错题本
+                Toast.makeText(getApplicationContext(),"错题本",Toast.LENGTH_SHORT).show();
             }else if (id == R.id.myself_xuexizhoubao){
                 //TODO 学习周报
+                Toast.makeText(getApplicationContext(),"学习周报",Toast.LENGTH_SHORT).show();
             }else if (id == R.id.myself_edit){
                 Intent intent = new Intent(getApplicationContext(),EditMyselfActivity.class);
                 startActivity(intent);
             }else if (id == R.id.myself_setting){
                 //退出登录
-                BmobUser.logOut();
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                logOut();
             }
         }
+    }
+
+    /**
+     * 退出登陆
+     */
+    private void logOut() {
+        BmobUser.logOut();
+        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        startActivity(intent);
+        Objects.requireNonNull(getActivity()).finish();
     }
 
 }

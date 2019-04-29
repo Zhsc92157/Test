@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +27,8 @@ import java.io.File;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class EditMyselfActivity extends AppCompatActivity {
 
@@ -47,7 +50,7 @@ public class EditMyselfActivity extends AppCompatActivity {
 
     Listener listener;
 
-    private ChoosePicturePopUpWindow popUpWindow;
+    ChoosePicturePopUpWindow popUpWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,18 @@ public class EditMyselfActivity extends AppCompatActivity {
 
         initView();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserInformation();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getUserInformation();
     }
 
     private void initView() {
@@ -75,14 +90,13 @@ public class EditMyselfActivity extends AppCompatActivity {
         getUserInformation();
 
         listener = new Listener();
+        popUpWindow = new ChoosePicturePopUpWindow(getApplicationContext(),listener);
 
         back.setOnClickListener(listener);
         layout_image.setOnClickListener(listener);
         layout_nickname.setOnClickListener(listener);
 
-        if (popUpWindow!=null&&popUpWindow.isShowing()){
-            popUpWindow.dismiss();
-        }
+
     }
 
     private void getUserInformation() {
@@ -97,6 +111,7 @@ public class EditMyselfActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(new File(user.getPath())).into(image_edit);
         }
         text_username.setText(user.getUsername());
+
     }
 
     class Listener implements View.OnClickListener{
@@ -107,24 +122,7 @@ public class EditMyselfActivity extends AppCompatActivity {
                 finish();
             }
             if (v.getId() == R.id.relativeLayout_editImage){
-                popUpWindow = new ChoosePicturePopUpWindow(getApplicationContext(),listener);
-                //屏幕变暗
-                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-                layoutParams.alpha=0.3f;
-                getWindow().setAttributes(layoutParams);
-
-                popUpWindow.showAtLocation(findViewById(R.id.editMyselfActivityLayout), Gravity.BOTTOM,0,0);
-
-                popUpWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        //屏幕变亮
-                        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-                        layoutParams.alpha = 1.0f;
-                        getWindow().setAttributes(layoutParams);
-                    }
-                });
-
+                showPopUpWindow();
             }
             if (v.getId() == R.id.relativeLayout_editNickname){
                 //跳转到一个修改昵称的界面
@@ -132,15 +130,48 @@ public class EditMyselfActivity extends AppCompatActivity {
                 finish();
             }
             if (v.getId() == R.id.layout_choosePic_popUpWindow_cancel){
-                popUpWindow.dismiss();
+                if (popUpWindow!=null&&popUpWindow.isShowing()){
+                    popUpWindow.dismiss();
+                }
             }
             if (v.getId() == R.id.layout_choosePic_popUpWindow_take_photo){
+                if (popUpWindow!=null&&popUpWindow.isShowing()){
+                    popUpWindow.dismiss();
+                }
                 startCamera();
             }
             if (v.getId() == R.id.layout_choosePic_popUpWindow_album){
+                if (popUpWindow!=null&&popUpWindow.isShowing()){
+                    popUpWindow.dismiss();
+                }
                 startAlbum();
             }
         }
+    }
+
+    private void showPopUpWindow() {
+        //屏幕变暗
+       // ChoosePicturePopUpWindow popUpWindow = new ChoosePicturePopUpWindow(getApplicationContext(),listener);
+
+        if (popUpWindow!=null&&popUpWindow.isShowing()){
+            popUpWindow.dismiss();
+        }
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.alpha=0.3f;
+        getWindow().setAttributes(layoutParams);
+
+        popUpWindow.showAtLocation(findViewById(R.id.editMyselfActivityLayout), Gravity.BOTTOM,0,0);
+
+        popUpWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                //屏幕变亮
+                WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+                layoutParams.alpha = 1.0f;
+                getWindow().setAttributes(layoutParams);
+            }
+        });
+
     }
 
     private void startAlbum() {
@@ -174,6 +205,34 @@ public class EditMyselfActivity extends AppCompatActivity {
                 Log.e("EditMyselfActivity.java", "请确认已经插入SD卡");
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(),
+                        "get picture,path = " + mFilePath, Toast.LENGTH_SHORT).show();
+                updateImagePath(mFilePath);
+            }
+        }
+    }
+
+    private void updateImagePath(String mFilePath){
+        final User user = BmobUser.getCurrentUser(User.class);
+        user.setPath(mFilePath);
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e==null){
+                    Toast.makeText(getApplicationContext(),"更新用户信息成功",Toast.LENGTH_SHORT).show();
+                    recreate();
+                }else{
+                    Toast.makeText(getApplicationContext(),"更新用户信息失败",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 }
