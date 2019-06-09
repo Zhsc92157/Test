@@ -12,7 +12,11 @@ import com.zhsc.test.entity.User;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 
+import static com.zhsc.test.service.AuthService.getAuth;
+
 public class SplashActivity extends AppCompatActivity {
+
+    public static String accessToken = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         public void run() {
             try {
                 sleep(2000);//休眠
+                accessToken = getAuth();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

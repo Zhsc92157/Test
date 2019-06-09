@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -40,8 +42,6 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.zhsc.test.service.AuthService.getAuth;
 
 public class ImageActivity extends AppCompatActivity {
 
@@ -191,7 +191,7 @@ public class ImageActivity extends AppCompatActivity {
      * 向服务器发送请求  得到返回得识别结果和位置信息
      */
     private void httpsPost(){
-        //通用带精确位置识别url
+        //手写体识别url
         String host = "https://aip.baidubce.com/rest/2.0/ocr/v1/handwriting";
         //文件路径
         String filePath = imagePath;
@@ -204,7 +204,7 @@ public class ImageActivity extends AppCompatActivity {
             /**
              * 线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
              */
-            String accessToken = getAuth();
+            String accessToken = SplashActivity.accessToken;
             Log.e("httpsPost", accessToken);
             //获取识别结果
             result = HttpUtil.post(host,accessToken,params);
@@ -256,7 +256,7 @@ public class ImageActivity extends AppCompatActivity {
      * @param left
      * @param top
      */
-    public void addView(float width,float height,float left,float top,int i){
+    public void addView(float width, float height, float left, float top, final int i){
         //new一个imageView作为矩形红框
         ImageView rectangle = new ImageView(relativeLayout.getContext());
 
@@ -270,7 +270,22 @@ public class ImageActivity extends AppCompatActivity {
 
         rectangle.setImageDrawable(gd_rectangle);
 
-        //设置一个RING标识是否正确
+        //TODO  为rectangle设置点击监听，弹出窗口显示识别结果
+
+        rectangle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String result = wordsList.get(i);
+                result = result.replace('/','1');
+                RecPopUpWindow recPopUpWindow = new RecPopUpWindow(getApplicationContext(),result);
+                if (recPopUpWindow!=null&&recPopUpWindow.isShowing()){
+                    recPopUpWindow.dismiss();
+                }
+                recPopUpWindow.showAtLocation(findViewById(R.id.image_activity_relativeLayout), Gravity.BOTTOM,0,0);
+            }
+        });
+
+        //设置一个标识表示是否正确
         ImageView circle = new ImageView(relativeLayout.getContext());
         GradientDrawable gd_circle = new GradientDrawable();
         gd_circle.setGradientType(GradientDrawable.RECTANGLE);
@@ -278,6 +293,15 @@ public class ImageActivity extends AppCompatActivity {
         if (verify(wordsList.get(i))) {
             Log.e("wordList"+" "+i,"true");
             gd_circle.setStroke(10, Color.parseColor("#32CD32"));
+            //正确的不能点 设置为透明
+            GradientDrawable gd_rectangle_right = new GradientDrawable();
+            //设置矩形
+            gd_rectangle_right.setGradientType(GradientDrawable.RECTANGLE);
+            //颜色透明
+            gd_rectangle.setColor(Color.parseColor("#00000000"));
+            gd_rectangle.setStroke(5,Color.parseColor("#00000000"));
+            rectangle.setImageDrawable(gd_rectangle);
+            rectangle.setClickable(false);
         }else {
             Log.e("wordList"+" "+i,"false");
             gd_circle.setStroke(10, Color.parseColor("#FF0000"));
@@ -298,8 +322,7 @@ public class ImageActivity extends AppCompatActivity {
         float addHeightTemp = (image_height-real_height*multiple)/2;
         float addLeftTemp = (image_width-real_width*multiple)/2;
         //添加横向或者纵向的偏移
-        if (flag)
-        {
+        if (flag) {
             width = width*multiple;
             height = height*multiple;
             left = left*multiple;

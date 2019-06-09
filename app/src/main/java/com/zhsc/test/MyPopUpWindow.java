@@ -63,7 +63,6 @@ public class MyPopUpWindow extends PopupWindow {
 
 
     public class Listener implements AdapterView.OnItemClickListener{
-
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (selectItemListener != null)

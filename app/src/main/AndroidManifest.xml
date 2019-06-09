@@ -14,9 +14,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/main_image"
+        android:label="智能作业检查"
+        android:roundIcon="@drawable/main_image"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".EditNicknameActivity"/>

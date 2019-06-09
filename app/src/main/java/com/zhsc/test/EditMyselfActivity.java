@@ -151,8 +151,7 @@ public class EditMyselfActivity extends AppCompatActivity {
 
     private void showPopUpWindow() {
         //屏幕变暗
-       // ChoosePicturePopUpWindow popUpWindow = new ChoosePicturePopUpWindow(getApplicationContext(),listener);
-
+        //ChoosePicturePopUpWindow popUpWindow = new ChoosePicturePopUpWindow(getApplicationContext(),listener);
         if (popUpWindow!=null&&popUpWindow.isShowing()){
             popUpWindow.dismiss();
         }

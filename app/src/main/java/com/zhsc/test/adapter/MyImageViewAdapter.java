@@ -71,7 +71,6 @@ public class MyImageViewAdapter extends RecyclerView.Adapter<MyImageViewAdapter.
 
     @Override
     public void onBindViewHolder(MyImageViewAdapter.ViewHolder viewHolder, int position) {
-
         Glide.with(viewHolder.imageView.getContext())
                 .load(imagePathList.get(position))
                 .into(viewHolder.imageView);

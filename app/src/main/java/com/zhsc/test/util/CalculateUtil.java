@@ -89,6 +89,7 @@ public class CalculateUtil {
         result = str.replace('x', '*');
         result = result.replace(multi,'*');
         result = result.replace('X','*');
+        result = result.replace('/','1');
         result = result.replace('÷','/');
         System.out.println(result);
         return result;

@@ -59,7 +59,7 @@ public class MainFragment extends Fragment{
         bt_photo = view.findViewById(R.id.bt_main_fragment_photo);
         bt_album = view.findViewById(R.id.bt_main_fragment_album);
 
-        textView.setText("OCR");
+        textView.setText("智能作业检查");
         textView.setTextSize(40);
 
         Listener listener = new Listener();
